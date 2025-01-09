@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="first_child_font_size">8sp</dimen>
+    <dimen name="second_child_font_size">10sp</dimen>
+    <dimen name="first_child_font_size_compose">22sp</dimen>
+    <dimen name="second_child_font_size_compose">40sp</dimen>
+</resources>
