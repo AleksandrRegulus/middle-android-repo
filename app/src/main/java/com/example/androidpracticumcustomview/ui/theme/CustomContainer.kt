@@ -2,12 +2,13 @@ package com.example.androidpracticumcustomview.ui.theme
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import androidx.core.view.children
+import com.example.androidpracticumcustomview.ui.util.Constants.ANIMATION_LENGTH_ALPHA
+import com.example.androidpracticumcustomview.ui.util.Constants.ANIMATION_LENGTH_MOVE_Y
 
 /*
 Задание:
@@ -18,18 +19,12 @@ import androidx.core.view.children
 Предусмотрите параметризацию длительности анимации.
  */
 
-@SuppressLint("ResourceAsColor")
 class CustomContainer @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : FrameLayout(context, attrs) {
 
     init {
         setWillNotDraw(false)
-    }
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -55,16 +50,15 @@ class CustomContainer @JvmOverloads constructor(
     }
 
     override fun addView(child: View) {
+        if (childCount > 2) throw IllegalStateException("Not more 2 children")
         super.addView(child)
-        if (childCount > 2) error("IllegalStateException")
     }
 
-    private fun animateChild (child: View, targetY: Float) {
+    private fun animateChild(child: View, targetY: Float) {
         val animAlpha = ObjectAnimator.ofFloat(child, "alpha", 1f)
-        animAlpha.duration = 2000
+        animAlpha.duration = ANIMATION_LENGTH_ALPHA
         val animYOffset = ObjectAnimator.ofFloat(child, "y", targetY)
-        animYOffset.duration = 5000
-
+        animYOffset.duration = ANIMATION_LENGTH_MOVE_Y
         val animatorSet = AnimatorSet()
         animatorSet.play(animAlpha).with(animYOffset)
         animatorSet.start()

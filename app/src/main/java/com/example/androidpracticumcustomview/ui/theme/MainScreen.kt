@@ -9,7 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
+import com.example.androidpracticumcustomview.R
 
 @Composable
 fun MainScreen() {
@@ -21,10 +24,17 @@ fun MainScreen() {
         ) {
 
             CustomContainerCompose {
-                Text(text = "firstChild", fontSize = 22.sp, color = Color.Red)
-                Text(text = "secondChild", fontSize = 42.sp, color = Color.Blue)
+                Text(
+                    text = stringResource(R.string.first_child_text),
+                    fontSize = dimensionResource(R.dimen.first_child_font_size_compose).value.sp,
+                    color = Color.Red
+                )
+                Text(
+                    text = stringResource(R.string.second_child_text),
+                    fontSize = dimensionResource(R.dimen.second_child_font_size_compose).value.sp,
+                    color = Color.Blue
+                )
             }
-
         }
     }
 }

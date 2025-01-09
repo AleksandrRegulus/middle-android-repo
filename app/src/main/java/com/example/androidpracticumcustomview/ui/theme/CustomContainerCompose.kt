@@ -9,6 +9,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.layout.Layout
+import com.example.androidpracticumcustomview.ui.util.Constants.ANIMATION_LENGTH_ALPHA_COMPOSE
+import com.example.androidpracticumcustomview.ui.util.Constants.ANIMATION_LENGTH_MOVE_Y_COMPOSE
 import kotlinx.coroutines.launch
 
 /*
@@ -33,17 +35,17 @@ fun CustomContainerCompose(modifier: Modifier = Modifier, content: @Composable (
         launch {
             offsetYFirstChild.animateTo(
                 targetValue = targetOffsetYFirstChild.floatValue,
-                animationSpec = tween(5000)
+                animationSpec = tween(ANIMATION_LENGTH_MOVE_Y_COMPOSE)
             )
         }
         launch {
             offsetYSecondChild.animateTo(
                 targetValue = targetOffsetYSecondChild.floatValue,
-                animationSpec = tween(5000)
+                animationSpec = tween(ANIMATION_LENGTH_MOVE_Y_COMPOSE)
             )
         }
         launch {
-            alphaAnimation.animateTo(1f, animationSpec = tween(2000))
+            alphaAnimation.animateTo(1f, animationSpec = tween(ANIMATION_LENGTH_ALPHA_COMPOSE))
         }
     }
 
@@ -51,7 +53,7 @@ fun CustomContainerCompose(modifier: Modifier = Modifier, content: @Composable (
         modifier = modifier.alpha(alphaAnimation.value),
         content = content
     ) { measurables, constraints ->
-        if (measurables.count() > 2) error("IllegalStateException")
+        if (measurables.count() > 2) throw IllegalStateException("Not more 2 children")
         val placeables = measurables.map { measurable ->
             measurable.measure(constraints)
         }

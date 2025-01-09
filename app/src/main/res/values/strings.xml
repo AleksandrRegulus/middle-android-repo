@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">android practicum custom view</string>
+    <string name="first_child_text">firstView</string>
+    <string name="second_child_text">secondView</string>
 </resources>
